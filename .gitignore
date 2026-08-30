@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+encrypted_text.txt
+decrypted_text.txt
+output.txt
