@@ -1,12 +1,9 @@
-"""
-evaluator.py
+import os
+import sys
 
-Reads mathematical expressions from a text file (one per line) and
-tokenizes each one. Parsing, evaluation, and output writing are added
-in later commits.
-
-No classes are used anywhere in this module.
-"""
+# ----------------------------------------------------------------------
+# Tokenizer
+# ----------------------------------------------------------------------
 
 NUM, OP, LPAREN, RPAREN, END = "NUM", "OP", "LPAREN", "RPAREN", "END"
 
@@ -14,11 +11,6 @@ _OPERATORS = set("+-*/%^")
 
 
 def tokenize(expr: str):
-    """Turn an expression string into a list of (type, value) tuples,
-    ending with an ('END', '') token.
-
-    Returns None if an invalid character is encountered (lexical error).
-    """
     tokens = []
     i = 0
     n = len(expr)
@@ -37,7 +29,7 @@ def tokenize(expr: str):
             if i < n and expr[i] == '.':
                 i += 1
                 if i >= n or not expr[i].isdigit():
-                    return None  # '.' must be followed by at least one digit
+                    return None  
                 while i < n and expr[i].isdigit():
                     i += 1
             tokens.append((NUM, expr[start:i]))
@@ -58,7 +50,7 @@ def tokenize(expr: str):
             i += 1
             continue
 
-        return None  # unrecognised character -> lexical error
+        return None  
 
     tokens.append((END, ''))
     return tokens
